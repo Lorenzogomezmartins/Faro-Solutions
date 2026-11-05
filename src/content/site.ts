@@ -21,7 +21,7 @@ export const siteConfig = {
   name: "Faro Solutions",
   url: siteUrl,
   locale: "es_AR",
-  tagline: "Transformamos ideas en soluciones tecnológicas.",
+  tagline: "Tecnología a medida para resolver necesidades reales.",
   description:
     "Estudio de desarrollo de software en Argentina. Creamos software a medida, sistemas de gestión, aplicaciones web y móviles, sitios web, e-commerce e integraciones para empresas, PyMEs y emprendimientos.",
   keywords: [
