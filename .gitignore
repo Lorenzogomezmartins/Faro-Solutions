@@ -21,3 +21,6 @@ next-env.d.ts
 
 # configuración local de herramientas
 /.claude/
+
+# piezas para redes sociales (no forman parte del sitio)
+/redes/

@@ -15,7 +15,7 @@ export function Contact() {
   const channels = [
     whatsapp && { icon: "whatsapp", label: "WhatsApp", value: "Escribinos directamente", href: whatsapp, external: true },
     email && { icon: "mail", label: "Correo", value: email, href: `mailto:${email}` },
-    instagram && { icon: "instagram", label: "Instagram", value: "@_farosolutions", href: instagram, external: true },
+    instagram && { icon: "instagram", label: "Instagram", value: `@${instagram.split("/").filter(Boolean).pop()}`, href: instagram, external: true },
   ].filter(Boolean) as Channel[];
 
   // Botón principal para iniciar la conversación: WhatsApp si está configurado, si no correo.

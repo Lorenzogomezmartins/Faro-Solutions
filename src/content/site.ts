@@ -50,7 +50,7 @@ export const siteConfig = {
   /** TODO: completar las URLs de redes. Las que queden en null no se muestran. */
   social: {
     linkedin: null as string | null,
-    instagram: "https://www.instagram.com/_farosolutions/" as string | null,
+    instagram: "https://www.instagram.com/farosolutions_/" as string | null,
     github: null as string | null,
   },
 } as const;
