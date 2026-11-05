@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: Props) {
     <article className="pt-18">
       <Container className="pt-12 sm:pt-16">
         <Link
-          href="/#proyectos"
+          href="/proyectos"
           className="inline-flex items-center gap-2 text-sm text-silver/70 transition-colors hover:text-pearl"
         >
           <Icon name="arrowLeft" className="size-4" />

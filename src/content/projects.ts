@@ -24,9 +24,14 @@ export type ProjectImage = {
   height: number;
 };
 
+export const projectGroups = ["Sistemas y plataformas", "Aplicaciones móviles", "Sitios web"] as const;
+export type ProjectGroup = (typeof projectGroups)[number];
+
 export type Project = {
   /** Identificador para la URL: minúsculas y guiones (ej. "sistema-de-turnos"). */
   slug: string;
+  /** Grupo para los filtros de la página /proyectos. */
+  group: ProjectGroup;
   name: string;
   /** Una oración para la tarjeta. */
   summary: string;
@@ -71,6 +76,7 @@ const cover = (slug: string, alt: string) => img(slug, "cover.webp", alt, 1600, 
 export const projects: Project[] = [
   {
     slug: "zonasur-cars",
+    group: "Sistemas y plataformas",
     name: "ZonaSur Cars",
     summary: "Sistema web para una concesionaria: catálogo de autos y motos, reservas y panel de administración.",
     description:
@@ -101,6 +107,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fmj-federacion-de-judo",
+    group: "Sistemas y plataformas",
     name: "Federación Metropolitana de Judo",
     summary:
       "Sitio institucional y sistema de gestión para una federación deportiva: torneos, inscripciones, ranking, clubes y resultados.",
@@ -139,6 +146,7 @@ export const projects: Project[] = [
   // ── Proyectos demo: diseños propios, etiquetados como "Demo" ──
   {
     slug: "logistica-gestion-de-flota",
+    group: "Sistemas y plataformas",
     name: "Logix — Gestión logística y de flota",
     summary:
       "Plataforma para planificar rutas, seguir envíos en tiempo real y coordinar flota y choferes, con app móvil para el reparto.",
@@ -173,6 +181,7 @@ export const projects: Project[] = [
   },
   {
     slug: "chido-gestion-de-restaurante",
+    group: "Aplicaciones móviles",
     name: "Chido — Gestión de restaurante",
     summary:
       "App móvil para la gestión integral de un restaurante, con flujos para clientes y para cada rol del personal.",
@@ -206,6 +215,7 @@ export const projects: Project[] = [
   },
   {
     slug: "il-faro-cucina",
+    group: "Aplicaciones móviles",
     name: "Il Faro Cucina",
     summary: "App móvil de gestión de restaurante con pedidos, mesas, cuenta, propinas y reportes en tiempo real.",
     description:
@@ -238,6 +248,7 @@ export const projects: Project[] = [
   },
   {
     slug: "reservas-canchas-de-futbol",
+    group: "Sistemas y plataformas",
     name: "Canchas+ — Gestión de complejo de fútbol",
     summary:
       "Sistema de reservas y administración para complejos de fútbol: agenda por cancha, señas online, torneos y caja.",
@@ -272,6 +283,7 @@ export const projects: Project[] = [
   },
   {
     slug: "gestion-comercial-erp",
+    group: "Sistemas y plataformas",
     name: "Gestiona — Gestión comercial para PyMEs",
     summary: "Sistema de gestión con ventas, facturación, stock, compras, clientes y caja en un solo lugar.",
     description:
@@ -304,6 +316,7 @@ export const projects: Project[] = [
   },
   {
     slug: "sala-de-juegos",
+    group: "Sistemas y plataformas",
     name: "Arcade 444 — Sala de juegos",
     summary: "Plataforma web de minijuegos con registro de usuarios, chat en tiempo real y estadísticas por jugador.",
     description:
@@ -333,6 +346,7 @@ export const projects: Project[] = [
   },
   {
     slug: "landing-fotografo",
+    group: "Sitios web",
     name: "Marea — Landing para fotógrafo",
     summary: "Landing page para un fotógrafo de bodas, retratos y marcas, con portfolio y consulta de fechas.",
     description:
@@ -356,6 +370,7 @@ export const projects: Project[] = [
   },
   {
     slug: "landing-consultorio-odontologico",
+    group: "Sitios web",
     name: "Dentalia — Landing para consultorio",
     summary: "Landing page para un consultorio odontológico con turnos online, tratamientos y contacto por WhatsApp.",
     description:

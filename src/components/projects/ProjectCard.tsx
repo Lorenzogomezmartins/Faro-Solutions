@@ -4,147 +4,106 @@ import type { Project } from "@/content/projects";
 import { cn } from "@/lib/utils";
 import { ProjectCover } from "./ProjectCover";
 
-/** hero: proyecto principal · large: destacado · compact: resto del portfolio. */
-export type ProjectCardVariant = "hero" | "large" | "compact";
-
-const coverZoom =
-  "[&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-out-expo group-hover:[&_img]:scale-[1.03]";
-
-function Meta({ project }: { project: Project }) {
-  return (
-    <p className="flex flex-wrap items-center gap-x-2.5 gap-y-2 text-xs tracking-[0.18em] text-mist uppercase">
-      {project.concept && <ConceptBadge />}
-      <span>{project.category}</span>
-      {project.year && (
-        <>
-          <span aria-hidden>·</span>
-          <span>{project.year}</span>
-        </>
-      )}
-    </p>
-  );
-}
+/**
+ * feature: proyecto principal (gran formato) · tile: mosaico estándar ·
+ * wide: horizontal a dos columnas.
+ */
+export type ProjectCardVariant = "feature" | "tile" | "wide";
 
 /** Identifica los proyectos demo (diseños propios, no trabajos entregados a clientes). */
-export function ConceptBadge() {
+export function ConceptBadge({ className }: { className?: string }) {
   return (
     <span
       title="Proyecto demo de Faro Solutions"
-      className="rounded-full border border-silver/35 px-2 py-0.5 tracking-[0.12em] text-silver"
+      className={cn(
+        "inline-flex items-center rounded-full border border-silver/35 bg-obsidian/70 px-2.5 py-0.5 text-[0.68rem] font-medium tracking-[0.14em] text-silver uppercase backdrop-blur",
+        className,
+      )}
     >
       Demo
     </span>
   );
 }
 
-function Title({ project, className }: { project: Project; className: string }) {
+function Technologies({ project, max }: { project: Project; max: number }) {
+  const visible = project.technologies.slice(0, max);
+  const rest = project.technologies.length - visible.length;
   return (
-    <h3 className={cn("font-semibold", className)}>
-      {/* El enlace cubre toda la tarjeta para facilitar el clic. */}
-      <Link href={`/proyectos/${project.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
-        {project.name}
-      </Link>
-    </h3>
-  );
-}
-
-function Technologies({ project }: { project: Project }) {
-  return (
-    <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
-      {project.technologies.map((tech) => (
-        <li key={tech} className="rounded-full bg-graphite/70 px-3 py-1 text-xs text-silver/85">
+    <ul className="flex flex-wrap gap-1.5" aria-label="Tecnologías principales">
+      {visible.map((tech) => (
+        <li key={tech} className="rounded-full border border-line bg-white/[0.03] px-2.5 py-1 text-xs text-silver/85">
           {tech}
         </li>
       ))}
+      {rest > 0 && <li className="px-1.5 py-1 text-xs text-mist">+{rest}</li>}
     </ul>
   );
 }
 
-function More() {
-  return (
-    <span className="inline-flex items-center gap-2 text-sm font-medium text-pearl">
-      Ver proyecto
-      <Icon name="arrowRight" className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-    </span>
-  );
-}
-
 const shell =
-  "group relative overflow-hidden rounded-2xl border border-line bg-ink/60 transition-[border-color,transform] duration-500 ease-out-expo hover:-translate-y-1 hover:border-silver/30 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-pearl/60";
+  "group relative isolate flex h-full overflow-hidden rounded-3xl border border-line bg-ink/70 transition-[border-color,transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:border-silver/30 hover:shadow-[0_30px_80px_-40px_rgb(0_0_0/0.9)] has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-pearl/60";
 
-export function ProjectCard({ project, variant = "large" }: { project: Project; variant?: ProjectCardVariant }) {
-  if (variant === "hero") {
-    return (
-      <article className={cn(shell, "grid h-full lg:grid-cols-12")}>
-        <ProjectCover
-          project={project}
-          priority
-          sizes="(min-width: 1024px) 60vw, 100vw"
-          className={cn("aspect-[16/10] border-b border-line lg:col-span-7 lg:aspect-auto lg:h-full lg:min-h-[28rem] lg:border-r lg:border-b-0", coverZoom)}
-        />
-        <div className="flex flex-col p-7 sm:p-9 lg:col-span-5">
-          <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-silver/30 px-3 py-1 text-xs text-pearl">
-            <Icon name="spark" className="size-3.5" />
-            Proyecto destacado
-          </span>
-          <Meta project={project} />
-          <Title project={project} className="mt-3 text-2xl sm:text-3xl" />
-          <p className="mt-3 leading-relaxed text-silver/75">{project.summary}</p>
-          <ul className="mt-5 space-y-1.5 text-sm text-silver/85">
-            {project.features.slice(0, 4).map((feature) => (
-              <li key={feature} className="flex gap-2">
-                <Icon name="check" className="mt-0.5 size-4 shrink-0 text-pearl" />
-                {feature}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6">
-            <Technologies project={project} />
-          </div>
-          <div className="mt-auto pt-7">
-            <More />
-          </div>
-        </div>
-      </article>
-    );
-  }
+const zoom =
+  "[&_img]:transition-transform [&_img]:duration-[900ms] [&_img]:ease-out-expo group-hover:[&_img]:scale-[1.04]";
 
-  if (variant === "compact") {
-    return (
-      <article className={cn(shell, "flex h-full flex-col")}>
-        <ProjectCover
-          project={project}
-          sizes="(min-width: 1280px) 30vw, (min-width: 768px) 50vw, 100vw"
-          className={cn("aspect-[16/9] border-b border-line", coverZoom)}
-        />
-        <div className="flex flex-1 flex-col p-6">
-          <Meta project={project} />
-          <Title project={project} className="mt-2 text-lg" />
-          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-silver/70">{project.summary}</p>
-          <div className="mt-auto pt-3">
-            <More />
-          </div>
-        </div>
-      </article>
-    );
-  }
+export function ProjectCard({
+  project,
+  variant = "tile",
+  priority,
+}: {
+  project: Project;
+  variant?: ProjectCardVariant;
+  priority?: boolean;
+}) {
+  const href = `/proyectos/${project.slug}`;
+  const isFeature = variant === "feature";
+  const isWide = variant === "wide";
 
   return (
-    <article className={cn(shell, "flex h-full flex-col")}>
-      <ProjectCover
-        project={project}
-        sizes="(min-width: 768px) 50vw, 100vw"
-        className={cn("aspect-[16/10] border-b border-line", coverZoom)}
-      />
-      <div className="flex flex-1 flex-col p-7">
-        <Meta project={project} />
-        <Title project={project} className="mt-3 text-2xl" />
-        <p className="mt-3 leading-relaxed text-silver/75">{project.summary}</p>
-        <div className="mt-5">
-          <Technologies project={project} />
-        </div>
-        <div className="mt-auto pt-6">
-          <More />
+    <article className={cn(shell, isWide ? "flex-col sm:flex-row" : "flex-col")}>
+      <div className={cn("relative overflow-hidden", isWide && "sm:w-[55%] sm:shrink-0", isFeature && "lg:min-h-[22rem] lg:flex-1")}>
+        <ProjectCover
+          project={project}
+          priority={priority}
+          fit={isFeature ? "contain" : "cover"}
+          sizes={isFeature ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+          className={cn(
+            zoom,
+            isFeature ? "aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto" : isWide ? "aspect-[16/10] sm:h-full sm:aspect-auto" : "aspect-[16/10]",
+          )}
+        />
+        {/* Degradado para integrar la imagen con la tarjeta */}
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent",
+            isWide && "sm:bg-gradient-to-l",
+          )}
+        />
+        {project.concept && <ConceptBadge className="absolute top-4 left-4" />}
+        <span
+          aria-hidden
+          className="absolute top-4 right-4 inline-flex size-10 items-center justify-center rounded-full border border-silver/30 bg-obsidian/70 text-pearl opacity-0 backdrop-blur transition-[opacity,transform] duration-500 ease-out-expo group-hover:opacity-100 group-hover:rotate-0 sm:-rotate-45"
+        >
+          <Icon name="arrowRight" className="size-4" />
+        </span>
+      </div>
+
+      <div className={cn("flex flex-col", isFeature ? "p-7 sm:p-8" : "flex-1 p-6")}>
+        <p className="text-xs tracking-[0.18em] text-mist uppercase">
+          {project.category}
+          {project.year && <span className="ml-2 text-mist/70">· {project.year}</span>}
+        </p>
+        <h3 className={cn("mt-2.5 font-semibold", isFeature ? "text-2xl sm:text-3xl" : "text-xl")}>
+          <Link href={href} className="after:absolute after:inset-0 focus-visible:outline-none">
+            {project.name}
+          </Link>
+        </h3>
+        <p className={cn("mt-2.5 leading-relaxed text-silver/75", isFeature ? "max-w-2xl" : "line-clamp-2 text-[0.95rem]")}>
+          {project.summary}
+        </p>
+        <div className="mt-auto pt-5">
+          <Technologies project={project} max={isFeature ? 6 : 3} />
         </div>
       </div>
     </article>

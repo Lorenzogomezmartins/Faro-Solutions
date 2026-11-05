@@ -28,13 +28,18 @@ type HeadingProps = {
   description?: ReactNode;
   align?: "left" | "center";
   className?: string;
+  /** Título más chico para columnas angostas. */
+  compact?: boolean;
 };
 
-export function SectionHeading({ id, eyebrow, title, description, align = "left", className }: HeadingProps) {
+export function SectionHeading({ id, eyebrow, title, description, align = "left", className, compact }: HeadingProps) {
   return (
     <Reveal className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       <p className={cn("eyebrow", align === "center" && "justify-center")}>{eyebrow}</p>
-      <h2 id={id} className="mt-5 text-3xl leading-[1.12] font-semibold sm:text-4xl lg:text-[2.85rem]">
+      <h2
+        id={id}
+        className={cn("mt-5 text-3xl leading-[1.12] font-semibold sm:text-4xl", compact ? "lg:text-[2.3rem]" : "lg:text-[2.85rem]")}
+      >
         {title}
       </h2>
       {description && <p className="mt-5 text-base leading-relaxed text-silver/80 sm:text-lg">{description}</p>}

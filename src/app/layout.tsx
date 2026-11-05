@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Desarrollo de software a medida`,
+    default: `${siteConfig.name} | Desarrollo de software a medida en Argentina`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: "/",
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Desarrollo de software a medida`,
+    title: `${siteConfig.name} | Desarrollo de software a medida en Argentina`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Desarrollo de software a medida`,
+    title: `${siteConfig.name} | Desarrollo de software a medida en Argentina`,
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },
@@ -46,11 +46,14 @@ export const viewport: Viewport = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   name: siteConfig.name,
   url: siteConfig.url,
   logo: `${siteConfig.url}/brand/faro-mark.png`,
+  image: `${siteConfig.url}/opengraph-image`,
   description: siteConfig.description,
+  areaServed: { "@type": "Country", name: "Argentina" },
+  knowsAbout: ["Desarrollo de software a medida", "Sistemas de gestión", "Aplicaciones móviles", "Desarrollo web", "E-commerce", "APIs e integraciones"],
   ...(siteConfig.contact.email && { email: siteConfig.contact.email }),
   sameAs: Object.values(siteConfig.social).filter(Boolean),
 };

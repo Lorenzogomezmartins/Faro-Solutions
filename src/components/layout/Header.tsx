@@ -141,7 +141,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <div className="hidden sm:block">
             <ButtonLink href="/#contacto" size="md">
-              Solicitar presupuesto
+              Iniciar proyecto
             </ButtonLink>
           </div>
           <button
@@ -195,7 +195,7 @@ export function Header() {
               </ul>
               <div className="mt-auto pt-10">
                 <ButtonLink href="/#contacto" size="lg" icon="arrowRight" className="w-full" onClick={() => setOpen(false)}>
-                  Contanos tu proyecto
+                  Iniciar proyecto
                 </ButtonLink>
               </div>
             </nav>

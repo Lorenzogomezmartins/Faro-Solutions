@@ -1,6 +1,6 @@
 # Faro Solutions — Sitio web institucional
 
-Sitio institucional de **Faro Solutions**, desarrollado con Next.js. Es una sola página con las secciones Inicio, Proyectos, Servicios, Nosotros, Proceso, Seguridad y Contacto, más una página de detalle por proyecto (`/proyectos/<slug>`) y un formulario de contacto que envía correos reales.
+Sitio institucional de **Faro Solutions**, desarrollado con Next.js. Es una landing con 7 secciones (Inicio, Servicios, Proyectos, Nosotros, Proceso, Diferenciales y Contacto), un portfolio completo con filtros (`/proyectos`), una página de detalle por proyecto (`/proyectos/<slug>`) y un formulario de contacto que envía correos reales.
 
 ---
 
@@ -87,7 +87,7 @@ npm run brand:assets   # regenera favicon e íconos desde el isotipo
 
 | Variable | Obligatoria | Descripción |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Sí (producción) | URL pública sin barra final, ej. `https://www.farosolutions.com`. Se usa en SEO, sitemap y Open Graph. |
+| `NEXT_PUBLIC_SITE_URL` | Solo con dominio propio | URL pública sin barra final, ej. `https://www.farosolutions.com`. Se usa en SEO, sitemap y Open Graph. Si no se define, en Vercel se usa automáticamente el dominio de producción del proyecto. |
 | `RESEND_API_KEY` | Sí | Clave privada de Resend. **Nunca** con prefijo `NEXT_PUBLIC_`. |
 | `CONTACT_TO_EMAIL` | Sí | Casilla institucional que recibe las consultas. Admite varias separadas por coma. |
 | `CONTACT_FROM_EMAIL` | Sí | Remitente verificado, ej. `Faro Solutions <web@tu-dominio.com>`. |

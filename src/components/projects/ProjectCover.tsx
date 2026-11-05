@@ -8,10 +8,12 @@ type Props = {
   className?: string;
   priority?: boolean;
   sizes?: string;
+  /** "contain" muestra la portada completa (formatos con proporción distinta a 16:10). */
+  fit?: "cover" | "contain";
 };
 
 /** Captura del proyecto o, si todavía no hay imagen, una portada neutra de marca. */
-export function ProjectCover({ project, className, priority, sizes = "(min-width: 1024px) 50vw, 100vw" }: Props) {
+export function ProjectCover({ project, className, priority, sizes = "(min-width: 1024px) 50vw, 100vw", fit = "cover" }: Props) {
   return (
     <div className={cn("relative overflow-hidden bg-graphite/40", className)}>
       {project.cover ? (
@@ -21,7 +23,7 @@ export function ProjectCover({ project, className, priority, sizes = "(min-width
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className={fit === "contain" ? "object-contain" : "object-cover"}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">

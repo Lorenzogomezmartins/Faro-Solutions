@@ -22,19 +22,11 @@
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --animate-beam: beam 9s ease-in-out infinite;
-
-  @keyframes beam {
-    0%, 100% { transform: rotate(-4deg); opacity: 0.75; }
-    50% { transform: rotate(3deg); opacity: 1; }
-  }
 }
 
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-@keyframes fade-in {
-  to { opacity: 1; }
+/* Cursor del editor de código del hero */
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 @layer base {
@@ -97,17 +89,6 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
-
-  /* Trazado progresivo de la retícula del hero */
-  .construction > :not(.construction-fade) {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    animation: draw 2.4s var(--ease-out-expo) forwards;
-  }
-  .construction-fade {
-    opacity: 0;
-    animation: fade-in 2s ease-out 0.4s forwards;
   }
 
   .surface {

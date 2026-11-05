@@ -5,25 +5,36 @@
  * (no se muestra ningún dato inventado).
  */
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+/**
+ * URL pública. Prioridad: NEXT_PUBLIC_SITE_URL (dominio propio) → dominio de
+ * producción que informa Vercel automáticamente → localhost en desarrollo.
+ */
+function resolveSiteUrl() {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  return "http://localhost:3000";
+}
+
+const siteUrl = resolveSiteUrl().replace(/\/$/, "");
 
 export const siteConfig = {
   name: "Faro Solutions",
   url: siteUrl,
   locale: "es_AR",
-  tagline: "Desarrollamos tecnología a medida para resolver necesidades reales.",
+  tagline: "Transformamos ideas en soluciones tecnológicas.",
   description:
-    "Faro Solutions es un equipo de desarrollo de software. Creamos software a medida, sitios web, sistemas de gestión, aplicaciones, integraciones y automatizaciones para empresas, PyMEs, emprendimientos y profesionales.",
+    "Estudio de desarrollo de software en Argentina. Creamos software a medida, sistemas de gestión, aplicaciones web y móviles, sitios web, e-commerce e integraciones para empresas, PyMEs y emprendimientos.",
   keywords: [
     "desarrollo de software a medida",
-    "desarrollo web",
+    "desarrollo de software Argentina",
     "sistemas de gestión",
+    "desarrollo de aplicaciones móviles",
     "aplicaciones web",
-    "automatización de procesos",
-    "integración de APIs",
+    "diseño y desarrollo web",
     "e-commerce",
+    "APIs e integraciones",
+    "automatización de procesos",
     "software para PyMEs",
-    "Argentina",
   ],
 
   contact: {
@@ -45,10 +56,10 @@ export const siteConfig = {
 } as const;
 
 export const navigation = [
-  { label: "Proyectos", href: "/#proyectos" },
+  { label: "Inicio", href: "/#inicio" },
   { label: "Servicios", href: "/#servicios" },
+  { label: "Proyectos", href: "/#proyectos" },
   { label: "Nosotros", href: "/#nosotros" },
-  { label: "Cómo trabajamos", href: "/#proceso" },
   { label: "Contacto", href: "/#contacto" },
 ] as const;
 
