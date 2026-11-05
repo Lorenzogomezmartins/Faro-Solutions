@@ -8,6 +8,7 @@ import {
 } from "@/lib/contact/schema";
 import { rateLimit } from "@/lib/contact/rate-limit";
 import { EmailConfigError, sendContactEmail } from "@/lib/email/send-contact-email";
+import { siteConfig } from "@/content/site";
 
 export const runtime = "nodejs";
 
@@ -93,6 +94,8 @@ export async function POST(request: NextRequest) {
     // El detalle queda en los logs del servidor; al usuario solo un mensaje genérico.
     if (error instanceof EmailConfigError) {
       console.error("[contact] Configuración de correo incompleta:", error.message);
+      const fallback = siteConfig.contact.email ? ` Escribinos directamente a ${siteConfig.contact.email}.` : "";
+      return json({ ok: false, error: `El formulario no está disponible en este momento.${fallback}` }, 503);
     } else {
       console.error("[contact] Error al enviar el correo:", error);
     }

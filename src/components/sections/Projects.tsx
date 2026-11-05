@@ -21,7 +21,7 @@ export function Projects() {
           id="proyectos-title"
           eyebrow="Proyectos"
           title="Lo que construimos"
-          description="Plataformas, sistemas y aplicaciones construidos de punta a punta. Los marcados como «Concepto» son diseños propios que muestran cómo resolvemos casos típicos."
+          description="Plataformas, sistemas y aplicaciones construidos de punta a punta."
         />
 
         {main ? (

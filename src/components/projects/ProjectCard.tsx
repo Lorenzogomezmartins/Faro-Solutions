@@ -25,14 +25,14 @@ function Meta({ project }: { project: Project }) {
   );
 }
 
-/** Identifica los proyectos conceptuales (diseños propios, no trabajos para clientes). */
+/** Identifica los proyectos demo (diseños propios, no trabajos entregados a clientes). */
 export function ConceptBadge() {
   return (
     <span
-      title="Proyecto conceptual: diseño propio de Faro Solutions"
+      title="Proyecto demo de Faro Solutions"
       className="rounded-full border border-silver/35 px-2 py-0.5 tracking-[0.12em] text-silver"
     >
-      Concepto
+      Demo
     </span>
   );
 }

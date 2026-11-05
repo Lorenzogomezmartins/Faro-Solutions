@@ -8,7 +8,8 @@ import type { ContactInput } from "@/lib/contact/schema";
  * llegan al navegador. Ver README → "Configurar el envío de correos".
  */
 
-const RESEND_ENDPOINT = "https://api.resend.com/emails";
+// RESEND_API_URL solo se usa para pruebas locales; en producción se usa la API oficial.
+const RESEND_ENDPOINT = process.env.RESEND_API_URL || "https://api.resend.com/emails";
 
 export class EmailConfigError extends Error {}
 export class EmailDeliveryError extends Error {}
@@ -33,7 +34,16 @@ function row(label: string, value: string) {
   return `<tr><td style="padding:8px 16px 8px 0;color:#4B5563;font-size:13px;vertical-align:top;white-space:nowrap">${label}</td><td style="padding:8px 0;color:#0B0D10;font-size:14px">${value}</td></tr>`;
 }
 
+function receivedAt() {
+  return new Intl.DateTimeFormat("es-AR", {
+    dateStyle: "full",
+    timeStyle: "short",
+    timeZone: "America/Argentina/Buenos_Aires",
+  }).format(new Date());
+}
+
 function buildEmail(data: ContactInput) {
+  const date = receivedAt();
   const safe = {
     name: escapeHtml(data.name),
     company: data.company ? escapeHtml(data.company) : "—",
@@ -53,6 +63,7 @@ function buildEmail(data: ContactInput) {
     ${row("Correo", `<a href="mailto:${safe.email}" style="color:#0B0D10">${safe.email}</a>`)}
     ${row("Teléfono", safe.phone)}
     ${row("Tipo de proyecto", safe.projectType)}
+    ${row("Recibido", escapeHtml(date))}
   </table>
   <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #C0C6D4;border-radius:12px;color:#1F2328;font-size:14px;line-height:1.6">${safe.message}</div>
   <p style="margin-top:24px;color:#4B5563;font-size:12px">Respondé este correo para contestarle directamente a ${safe.email}.</p>
@@ -66,7 +77,9 @@ function buildEmail(data: ContactInput) {
     `Correo: ${data.email}`,
     `Teléfono: ${data.phone || "—"}`,
     `Tipo de proyecto: ${data.projectType}`,
+    `Recibido: ${date}`,
     "",
+    "Mensaje:",
     data.message,
   ].join("\n");
 

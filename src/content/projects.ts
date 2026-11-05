@@ -13,7 +13,7 @@
  * y los demás en formato compacto.
  *
  * Los proyectos con `concept: true` son diseños propios (no trabajos para clientes)
- * y se muestran con la etiqueta "Concepto".
+ * y se muestran con la etiqueta "Demo".
  */
 
 export type ProjectImage = {
@@ -51,8 +51,8 @@ export type Project = {
   /** Proyectos de mayor complejidad: se muestran con más jerarquía. */
   featured?: boolean;
   /**
-   * Proyecto conceptual: diseño propio que muestra cómo resolveríamos un caso típico.
-   * Se identifica con la etiqueta "Concepto" y no se presenta como trabajo para un cliente.
+   * Proyecto demo: diseño propio que muestra cómo resolveríamos un caso típico.
+   * Se identifica con la etiqueta "Demo" (no es un trabajo entregado a un cliente).
    */
   concept?: boolean;
   /** Borrador: solo visible en desarrollo (npm run dev). Nunca se publica en producción. */
@@ -136,14 +136,14 @@ export const projects: Project[] = [
     ],
     featured: true,
   },
-  // ── Proyectos conceptuales: diseños propios, etiquetados como "Concepto" ──
+  // ── Proyectos demo: diseños propios, etiquetados como "Demo" ──
   {
     slug: "logistica-gestion-de-flota",
     name: "Logix — Gestión logística y de flota",
     summary:
       "Plataforma para planificar rutas, seguir envíos en tiempo real y coordinar flota y choferes, con app móvil para el reparto.",
     description:
-      "Concepto de sistema logístico compuesto por un panel web de operaciones y una aplicación móvil para choferes, pensado para empresas de distribución y última milla.",
+      "Sistema logístico compuesto por un panel web de operaciones y una aplicación móvil para choferes, pensado para empresas de distribución y última milla.",
     problem:
       "Las empresas de distribución suelen coordinar envíos, choferes y vehículos con planillas y mensajes, sin visibilidad del estado real de cada entrega.",
     solution:
@@ -163,7 +163,10 @@ export const projects: Project[] = [
     cover: cover("logistica-gestion-de-flota", "Panel de operaciones y app de choferes de Logix"),
     gallery: [
       img("logistica-gestion-de-flota", "panel.webp", "Panel de operaciones", 1440, 900),
-      img("logistica-gestion-de-flota", "app-chofer.webp", "App del chofer", 540, 1169),
+      img("logistica-gestion-de-flota", "envios.webp", "Listado y seguimiento de envíos", 1440, 900),
+      img("logistica-gestion-de-flota", "reportes.webp", "Reportes de cumplimiento", 1440, 900),
+      img("logistica-gestion-de-flota", "app-chofer.webp", "App del chofer: próximas entregas", 540, 1169),
+      img("logistica-gestion-de-flota", "app-comprobante.webp", "App del chofer: comprobante de entrega", 540, 1169),
     ],
     featured: true,
     concept: true,
@@ -239,7 +242,7 @@ export const projects: Project[] = [
     summary:
       "Sistema de reservas y administración para complejos de fútbol: agenda por cancha, señas online, torneos y caja.",
     description:
-      "Concepto de plataforma para complejos deportivos con un panel de administración y una app donde los jugadores reservan y pagan la seña de su turno.",
+      "Plataforma para complejos deportivos con un panel de administración y una app donde los jugadores reservan y pagan la seña de su turno.",
     problem:
       "Muchos complejos gestionan reservas por teléfono o mensajes, con turnos superpuestos, señas difíciles de controlar y horarios libres que no se ocupan.",
     solution:
@@ -259,7 +262,10 @@ export const projects: Project[] = [
     cover: cover("reservas-canchas-de-futbol", "Agenda y app de reservas de Canchas+"),
     gallery: [
       img("reservas-canchas-de-futbol", "agenda.webp", "Agenda de canchas", 1440, 900),
-      img("reservas-canchas-de-futbol", "app-reservas.webp", "App de reservas para jugadores", 540, 1169),
+      img("reservas-canchas-de-futbol", "torneo.webp", "Torneo: tabla de posiciones y fixture", 1440, 900),
+      img("reservas-canchas-de-futbol", "caja.webp", "Caja del día y pagos", 1440, 900),
+      img("reservas-canchas-de-futbol", "app-reservas.webp", "App: elegir horario", 540, 1169),
+      img("reservas-canchas-de-futbol", "app-confirmacion.webp", "App: reserva confirmada", 540, 1169),
     ],
     featured: true,
     concept: true,
@@ -269,7 +275,7 @@ export const projects: Project[] = [
     name: "Gestiona — Gestión comercial para PyMEs",
     summary: "Sistema de gestión con ventas, facturación, stock, compras, clientes y caja en un solo lugar.",
     description:
-      "Concepto de sistema de gestión comercial (ERP) para comercios y PyMEs que necesitan ordenar la operación diaria y tener información para decidir.",
+      "Sistema de gestión comercial (ERP) para comercios y PyMEs que necesitan ordenar la operación diaria y tener información para decidir.",
     problem:
       "Muchas PyMEs registran ventas, stock y cobros en herramientas separadas, lo que genera errores, faltantes de mercadería y poca visibilidad del negocio.",
     solution:
@@ -287,7 +293,12 @@ export const projects: Project[] = [
       "Tablero de indicadores y reportes",
     ],
     cover: cover("gestion-comercial-erp", "Tablero de Gestiona"),
-    gallery: [img("gestion-comercial-erp", "resumen.webp", "Resumen del negocio", 1440, 900)],
+    gallery: [
+      img("gestion-comercial-erp", "resumen.webp", "Resumen del negocio", 1440, 900),
+      img("gestion-comercial-erp", "factura.webp", "Emisión de factura", 1440, 900),
+      img("gestion-comercial-erp", "inventario.webp", "Inventario y niveles de stock", 1440, 900),
+      img("gestion-comercial-erp", "app-ventas.webp", "App: ventas del día", 540, 1169),
+    ],
     featured: true,
     concept: true,
   },
@@ -310,11 +321,13 @@ export const projects: Project[] = [
       "Chat global en tiempo real",
       "Estadísticas por jugador",
     ],
-    cover: cover("sala-de-juegos", "Pantalla de inicio de Arcade 444"),
+    cover: cover("sala-de-juegos", "Juegos y estadísticas de Arcade 444"),
     gallery: [
+      img("sala-de-juegos", "juegos.webp", "Selección de juegos", 1440, 704),
+      img("sala-de-juegos", "ahorcado.webp", "Juego del ahorcado", 1440, 703),
+      img("sala-de-juegos", "estadisticas.webp", "Estadísticas por jugador", 1440, 698),
       img("sala-de-juegos", "inicio.webp", "Pantalla de inicio", 1440, 900),
       img("sala-de-juegos", "login.webp", "Inicio de sesión", 1440, 900),
-      img("sala-de-juegos", "registro.webp", "Registro de usuarios", 1440, 900),
     ],
     links: { live: "https://y-gold-sigma-23.vercel.app" },
   },
@@ -323,7 +336,7 @@ export const projects: Project[] = [
     name: "Marea — Landing para fotógrafo",
     summary: "Landing page para un fotógrafo de bodas, retratos y marcas, con portfolio y consulta de fechas.",
     description:
-      "Concepto de landing page con estética cinematográfica para profesionales de la fotografía que necesitan mostrar su trabajo y recibir consultas.",
+      "Landing page con estética cinematográfica para profesionales de la fotografía que necesitan mostrar su trabajo y recibir consultas.",
     problem:
       "Un fotógrafo necesita que su trabajo se vea a la altura y que los interesados puedan consultar disponibilidad sin fricción.",
     solution: "Una landing rápida, con imágenes protagonistas, portfolio por categoría y un formulario de consulta de fechas.",
@@ -333,7 +346,12 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Tailwind CSS"],
     features: ["Portfolio por categorías", "Consulta de fechas", "Imágenes optimizadas", "SEO y carga rápida"],
     cover: cover("landing-fotografo", "Landing page de Marea Fotografía"),
-    gallery: [img("landing-fotografo", "inicio.webp", "Inicio de la landing", 1440, 900)],
+    gallery: [
+      img("landing-fotografo", "inicio.webp", "Inicio de la landing", 1440, 900),
+      img("landing-fotografo", "portfolio.webp", "Portfolio por categorías", 1440, 900),
+      img("landing-fotografo", "paquetes.webp", "Paquetes y consulta de fecha", 1440, 900),
+      img("landing-fotografo", "mobile.webp", "Versión móvil", 540, 1169),
+    ],
     concept: true,
   },
   {
@@ -341,7 +359,7 @@ export const projects: Project[] = [
     name: "Dentalia — Landing para consultorio",
     summary: "Landing page para un consultorio odontológico con turnos online, tratamientos y contacto por WhatsApp.",
     description:
-      "Concepto de landing page para consultorios y centros de salud que quieren recibir turnos online y comunicar sus tratamientos con claridad.",
+      "Landing page para consultorios y centros de salud que quieren recibir turnos online y comunicar sus tratamientos con claridad.",
     problem: "Los pacientes buscan información clara y una forma simple de pedir turno, sin depender del teléfono.",
     solution: "Una landing clara y confiable con reserva de turnos, información de tratamientos y acceso directo a WhatsApp.",
     category: "Landing page",
@@ -350,7 +368,12 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Tailwind CSS"],
     features: ["Reserva de turnos online", "Tratamientos y obras sociales", "Contacto por WhatsApp", "SEO local"],
     cover: cover("landing-consultorio-odontologico", "Landing page de Dentalia"),
-    gallery: [img("landing-consultorio-odontologico", "inicio.webp", "Inicio de la landing", 1440, 900)],
+    gallery: [
+      img("landing-consultorio-odontologico", "inicio.webp", "Inicio de la landing", 1440, 900),
+      img("landing-consultorio-odontologico", "turnos.webp", "Reserva de turnos online", 1440, 900),
+      img("landing-consultorio-odontologico", "tratamientos.webp", "Tratamientos y obras sociales", 1440, 900),
+      img("landing-consultorio-odontologico", "mobile.webp", "Versión móvil", 540, 1169),
+    ],
     concept: true,
   },
 ];

@@ -90,12 +90,6 @@ export default async function ProjectPage({ params }: Props) {
             {project.name}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-silver/80">{project.summary}</p>
-          {project.concept && (
-            <p className="mt-5 max-w-2xl border-l border-silver/30 pl-4 text-sm leading-relaxed text-mist">
-              Proyecto conceptual: diseño propio de Faro Solutions que muestra cómo abordaríamos este tipo de solución.
-              No corresponde a un trabajo para un cliente.
-            </p>
-          )}
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12">

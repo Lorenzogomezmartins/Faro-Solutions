@@ -104,7 +104,11 @@ npm run brand:assets   # regenera favicon e íconos desde el isotipo
 4. Completar `CONTACT_TO_EMAIL` (dónde llegan las consultas) y `CONTACT_FROM_EMAIL` (una dirección del dominio verificado).
 5. Para probar sin dominio verificado se puede usar `CONTACT_FROM_EMAIL="Faro Solutions <onboarding@resend.dev>"`. En ese modo Resend solo entrega a la casilla dueña de la cuenta.
 
-Al responder un correo recibido, la respuesta va directo al cliente (`reply_to`).
+Al responder un correo recibido, la respuesta va directo al cliente (`reply_to`). El correo incluye todos los campos del formulario (nombre, empresa, correo, teléfono, tipo de proyecto y mensaje) y la fecha y hora de recepción.
+
+**Probar la configuración:** con las variables cargadas en `.env.local`, `npm run email:test` envía un correo de prueba a `CONTACT_TO_EMAIL`.
+
+Si faltan variables, el formulario no muestra una confirmación falsa: informa que no está disponible y ofrece el correo de contacto. Los errores de Resend se registran en los logs del servidor (en Vercel: **Logs** del proyecto).
 
 **Protecciones del formulario** (`src/app/api/contact/route.ts`):
 - Validación con Zod en el navegador **y** en el servidor (largos máximos, formato de correo y teléfono, caracteres de control).
@@ -148,7 +152,7 @@ Al responder un correo recibido, la respuesta va directo al cliente (`reply_to`)
 
 **Jerarquía visual:** el orden del array define el orden en pantalla. El primer proyecto con `featured: true` se muestra como proyecto principal (tarjeta a todo el ancho), los demás `featured` en tarjetas grandes y el resto en formato compacto. Hoy el principal es **ZonaSur Cars**, seguido por FMJ, Logix, Chido, Il Faro Cucina, Canchas+ y Gestiona.
 
-**Proyectos conceptuales:** `concept: true` marca un diseño propio que no fue un trabajo para un cliente (Logix, Canchas+, Gestiona, Marea y Dentalia). Se muestran con la etiqueta "Concepto", en el detalle llevan una aclaración y la sección de tecnologías se titula "Stack propuesto". Si alguno se convierte en un proyecto real, se reemplazan sus datos y capturas y se quita `concept: true`.
+**Proyectos demo:** `concept: true` marca un diseño propio que no fue un trabajo entregado a un cliente (Logix, Canchas+, Gestiona, Marea y Dentalia). Se muestran con la etiqueta "Demo" y la sección de tecnologías se titula "Stack propuesto". Si alguno se convierte en un proyecto real, se reemplazan sus datos y capturas y se quita `concept: true`.
 
 Las portadas (`cover.webp`, 1600×1000) se armaron sobre el fondo de marca: los proyectos reales con capturas de sus repositorios y sitios, y los conceptos con pantallas diseñadas para cada caso. Un proyecto también puede usar `draft: true` para verse solo en `npm run dev` y nunca en producción.
 
