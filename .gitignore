@@ -1,0 +1,23 @@
+# dependencias
+/node_modules
+
+# build
+/.next/
+/out/
+/build
+
+# entorno (nunca subir credenciales)
+.env
+.env*.local
+.env.production
+
+# varios
+.DS_Store
+*.pem
+npm-debug.log*
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# configuración local de herramientas
+/.claude/

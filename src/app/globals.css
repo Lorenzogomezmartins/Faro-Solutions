@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Tokens de marca — Faro Solutions (ver public/brand/brand-board.webp)
+   Paleta: Obsidian · Graphite · Steel · Silver · Pearl
+   Tipografía: Sora (títulos y logo) · Inter (textos y UI)
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-obsidian: #0b0d10;
+  --color-graphite: #1f2328;
+  --color-steel: #4b5563;
+  --color-silver: #c0c6d4;
+  --color-pearl: #f8fafc;
+
+  /* Derivados neutros para superficies y texto secundario */
+  --color-ink: #12151a;
+  --color-mist: #8e96a6;
+  --color-line: rgb(192 198 212 / 0.12);
+
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-beam: beam 9s ease-in-out infinite;
+
+  @keyframes beam {
+    0%, 100% { transform: rotate(-4deg); opacity: 0.75; }
+    50% { transform: rotate(3deg); opacity: 1; }
+  }
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-obsidian font-sans text-silver antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-pearl;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-silver text-obsidian;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-pearl);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Rótulo de sección: espaciado amplio, como "SOLUTIONS" en el logotipo */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-display text-[0.7rem] font-medium uppercase tracking-[0.2em] text-mist sm:text-xs sm:tracking-[0.28em];
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-silver/40;
+  }
+
+  /* Retícula de construcción tomada del brand board */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .text-metal {
+    background: linear-gradient(180deg, #f8fafc 0%, #c0c6d4 70%, #8e96a6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Trazado progresivo de la retícula del hero */
+  .construction > :not(.construction-fade) {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 2.4s var(--ease-out-expo) forwards;
+  }
+  .construction-fade {
+    opacity: 0;
+    animation: fade-in 2s ease-out 0.4s forwards;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-line bg-ink/70;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
